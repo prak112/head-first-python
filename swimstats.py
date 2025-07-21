@@ -37,9 +37,9 @@ def process_swim_data(filename):
   secs = int(mins_secs) - (mins * 60) # subtract acquired minutes (in seconds) from total seconds for actual representation of seconds, i.e., between 0 to 60
   avg_in_timerformat = f"{mins}:{secs}.{millisecs}"
 
-  return swimmer, age_group, distance, stroke, times, avg_in_timerformat
+  return swimmer, age_group, distance, stroke, times, times_in_msec, avg_in_timerformat
 
 
-if __name__ == "__main__":
-    abi_file = "Abi-10-50m-Back.txt"
-    process_swim_data(filename=abi_file)
+# if __name__ == "__main__":
+#     abi_file = "Abi-10-50m-Back.txt"
+#     process_swim_data(filename=abi_file)
