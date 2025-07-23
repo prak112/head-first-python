@@ -57,6 +57,7 @@ def generate_bar_chart(fname):
   Save generated bar chart to 'charts/' directory.
   Return path of generated bar chart file.
   """
+  import os
   import hfp_utils
 
   swimmer, age_group, distance, stroke, times, times_in_msec, avg_in_timerformat = process_swim_data(fname)
@@ -96,7 +97,7 @@ def generate_bar_chart(fname):
   html += footer
   
   # write generated html string to file
-  save_to = f"{DataFile.CHARTS_DIR.value}{fname.removesuffix('.txt')}.html"
+  save_to = os.path.realpath(f"{DataFile.CHARTS_DIR.value}{fname.removesuffix('.txt')}.html")
   with open(save_to, mode="w") as hf:
     print(html, file=hf) # file argument sends print data hf file
   
