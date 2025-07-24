@@ -1,5 +1,6 @@
-# Ignore all files in the virtual environment
+# Ignore environment files and variables
 .venv/
+app/.env
 
 # dataset directories
 swimdata/
