@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form method="post" action="{{ url }}">
+  <label for="{{ select_id }}">
+    Please choose a {{ select_id }} from the list:
+  </label>
+  <select name="{{ select_id }}" id="{{ select_id }}">
+    {% for name in data %}
+      <option value="{{ name }}">{{ name }}</option>
+    {% endfor %}
+  </select>
+  <p>
+    <input type="submit" value="Select">
+  </p>
+</form>
+
+<p>
+  <a href="/">Home</a> 
+</p>
+{% endblock %}
