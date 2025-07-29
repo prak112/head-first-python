@@ -69,6 +69,7 @@ def generate_bar_chart(fname):
           <title>
               {title}
           </title>
+          <link rel="stylesheet" href="/static/index.css"/>
       </head>
       <body>
           <h3>{title}</h3>
