@@ -1,0 +1,28 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(150, 200, 150);
+  margin: 10%;
+}
+
+h2 {
+  font-size: 150%;
+}
+
+input[type=submit] {
+  width: 10em;
+  padding: 2px;
+  border-radius: 10px;
+  border: 2px solid black;
+  color: blanchedalmond;
+  background-color: rebeccapurple;
+  font-weight: bold;
+}
+
+a{
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
