@@ -1,9 +1,14 @@
 # Ignore environment files and variables
 .venv/
 app/.env
+.vscode/
 
-# dataset directories
+# directories
 swimdata/
+charts/
 
 # cache directories
 __pycache__/
+
+# Auto-generated non-essential HTML files
+*[0-9]*-*.html
