@@ -45,8 +45,9 @@ Use this repository to:
 2. Create a new project directory for the infrastructure files (apparently a big deal!)
 3. Using VS Code Command Palette, initialize app or `azd init` using terminal (after IDE restart) by choosing a template to deploy a simple Flask app
   - The initializtion (`init`) process set up the resources (`resource-group`), infrastructure files, sample app and a brief documentation of how to get going with *azd*
-4. Zip `app/` and move it to new directory 
-5. Run `azd up` (= `azd auth login` + `azd package` + `azd provision` + `azd deploy`) in terminal
+4. Zip `app/` and move it to `src/` in new directory
+5. Update `azure.yaml` to point the project directory, `src/app`
+6. Run `azd up` (= `azd auth login` + `azd package` + `azd provision` + `azd deploy`) in terminal
   - This command might run a while since it performs several complex tasks (my deployment completed under 4 mins)
   - Downloads `Bicep` for setting up the infrastructure
   - Provisions the resources, services based on *Subscription* and *Location*
