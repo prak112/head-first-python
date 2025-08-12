@@ -1,8 +1,11 @@
 # Optional: constants declaration using enum class syntax
 from enum import Enum
 class DataFile(Enum):
-  DATA_DIR = "data/"
-  CHARTS_DIR = "templates/"
+# for development - "app/<dir_name>"
+# for production - "<dir_name>"
+  DATA_DIR = "app/data/"
+  RECORDS_DIR = "app/records.json"
+  CHARTS_DIR = "app/templates/"
 
 
 
@@ -51,6 +54,41 @@ def process_swim_data(textfile):
 
 
 
+def get_worldrecords(fname):
+  """Given filename of the swimmer, returns relevant world records in that particular course, distance and stroke.
+
+  Generates lookup value from filename and conversions dictionary.
+  Reads data stored in RECORDS_DIR.
+  Returns list with world record in each course. 
+  List data format - [LC Men, LC Women, SC Men, SC Women]
+  """
+
+  import json 
+
+  *_, distance, stroke = str(fname).removesuffix(".txt").split("-")
+  COURSES = ("LC Men", "LC Women", "SC Men", "SC Women")
+  conversions = {
+    "Free": "freestyle",
+    "Back": "backstroke",
+    "Fly":  "butterfly",
+    "Breast": "breaststroke",
+    "IM": "individual medley"
+  }
+  lookup = f"{distance} {conversions[stroke]}"
+
+  records_path = DataFile.RECORDS_DIR.value
+  with open(records_path, mode="r") as df:
+    records = json.load(fp=df)
+  
+  course_records = []
+  for course in COURSES:
+    course_record = records[course][lookup]
+    course_records.append(course_record)
+  
+  return course_records
+
+
+
 def generate_bar_chart(fname):
   """Given the name of a swimmer's file, generates a HTML/SVG-based bar chart.
   
@@ -60,6 +98,9 @@ def generate_bar_chart(fname):
   import hfp_utils
 
   swimmer, age_group, distance, stroke, times, times_in_msec, avg_in_timerformat = process_swim_data(fname)
+  course_records = get_worldrecords(fname)
+
+  # setup HTML with SVG barchart
   html = ""
   title = f"{swimmer}(Under {age_group}) {distance} - {stroke}"
   header = f"""
@@ -91,6 +132,8 @@ def generate_bar_chart(fname):
 
   footer = f"""
           <p>Average time: {avg_in_timerformat}</p>
+          <p>Men: {course_records[0]} ({course_records[2]})</p>
+          <p>Women: {course_records[1]} ({course_records[3]})</p>
           <p>
             <a href="/">Home</a> | <a href="/swimmers">All Swimmers</a>
           </p>
@@ -102,7 +145,7 @@ def generate_bar_chart(fname):
   # write generated html string to file
   save_to = f"{DataFile.CHARTS_DIR.value}{fname.removesuffix('.txt')}.html"
   with open(save_to, mode="w") as hf:
-    print(html, file=hf) # file argument sends print data hf file
+    print(html, file=hf) # file argument sends print data through hf file
   
   return save_to
 
