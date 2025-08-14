@@ -1,12 +1,12 @@
-# Optional: constants declaration using enum class syntax
+import json 
+import statistics
+
+# Declare directory and file paths using enum class
 from enum import Enum
 class DataFile(Enum):
-# for development - "app/<dir_name>"
-# for production - "<dir_name>"
-  DATA_DIR = "app/data/"
-  RECORDS_DIR = "app/records.json"
-  CHARTS_DIR = "app/templates/"
-
+  DATA_DIR = "data/"
+  JSONDATA = "records.json"
+  CHARTS_DIR = "templates/"
 
 
 def process_swim_data(textfile):
@@ -14,7 +14,6 @@ def process_swim_data(textfile):
 
   Given name of a swimmer's file (textfile) and return swimmer profile data and average lap time in a tuple.
   """
-  import statistics
 
   # sub-tasks 2a, 2b, 2c: Read file and split data for a list of items
   read_from = f"{DataFile.DATA_DIR.value}{textfile}"
@@ -55,18 +54,16 @@ def process_swim_data(textfile):
 
 
 def get_worldrecords(fname):
-  """Given filename of the swimmer, returns relevant world records in that particular course, distance and stroke.
+  """Given filename of the swimmer, returns relevant world records for that particular course, distance and stroke.
 
   Generates lookup value from filename and conversions dictionary.
-  Reads data stored in RECORDS_DIR.
+  Reads data stored in JSONDATA.
   Returns list with world record in each course. 
   List data format - [LC Men, LC Women, SC Men, SC Women]
   """
 
-  import json 
-
+  # prepare lookup value for swimmer's file
   *_, distance, stroke = str(fname).removesuffix(".txt").split("-")
-  COURSES = ("LC Men", "LC Women", "SC Men", "SC Women")
   conversions = {
     "Free": "freestyle",
     "Back": "backstroke",
@@ -76,10 +73,12 @@ def get_worldrecords(fname):
   }
   lookup = f"{distance} {conversions[stroke]}"
 
-  records_path = DataFile.RECORDS_DIR.value
+  # read data from JSON file
+  records_path = DataFile.JSONDATA.value
   with open(records_path, mode="r") as df:
     records = json.load(fp=df)
   
+  COURSES = ("LC Men", "LC Women", "SC Men", "SC Women") # order of data extracted
   course_records = []
   for course in COURSES:
     course_record = records[course][lookup]
