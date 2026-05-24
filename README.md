@@ -20,6 +20,35 @@ Use this repository to:
 
 <br>
 
+## Local Development Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/prak112/head-first-python.git
+   cd head-first-python
+   ```
+
+2. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Run the application:
+   ```bash
+   python app/app.py
+   ```
+
+5. Access the app at `http://localhost:5000` (or the configured port)
+
+
+---
+
 ## Deployment
 *Always dreaded this part. But the book made it smoother than expected!* 
 
