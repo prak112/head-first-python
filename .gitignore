@@ -10,5 +10,11 @@ charts/
 # cache directories
 __pycache__/
 
+# sqlite DBs
+*.sqlite3
+*.sqlite
+*.db
+/app/KuopioSwimmers.sqlite3
+
 # Auto-generated non-essential HTML files
 *[0-9]*-*.html
