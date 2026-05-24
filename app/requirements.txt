@@ -2,3 +2,5 @@ Flask==3.1.1
 Jinja2==3.1.6
 python-dotenv==1.1.1
 gazpacho==1.1
+DBcm==3.0.5
+mariadb==1.1.13
