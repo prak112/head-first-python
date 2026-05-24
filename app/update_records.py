@@ -25,7 +25,7 @@ for table, course in zip(TABLES, COURSES):
     columns = row.find(tag="td", mode="all")
     event = columns[0].text
     time = columns[1].text
-    if "relay" not in event:
+    if "relay" not in event: 
       data[course][event] = time
 
 # write data to JSON file
