@@ -4,9 +4,15 @@ import statistics
 # Declare directory and file paths using enum class
 from enum import Enum
 class DataFile(Enum):
-  DATA_DIR = "data/"
-  JSONDATA = "records.json"
-  CHARTS_DIR = "templates/"
+# for remote deployment
+  # DATA_DIR = "data/" 
+  # JSONDATA = "records.json"
+  # CHARTS_DIR = "templates/"
+
+# for local deployment
+  DATA_DIR = "app/data/" 
+  JSONDATA = "app/records.json"
+  CHARTS_DIR = "app/templates/"
 
 
 def process_swim_data(textfile):
